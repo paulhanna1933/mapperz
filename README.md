@@ -26,13 +26,13 @@ This application finds out exact time of sunrise/sunrise for a chosen city/date 
 
 + Host your project on heroku, see resources
 
-+ **Refactor**Use module.exports and require to break a single large server file into smaller modules.
++ **Refactor** Use module.exports and require to break a single large server file into smaller modules.
 
 + **File**Consider a good server file structure based on what we have discussed over the week.
 
-+ **CI**Employ continuous intergration on your project with Travis or a similar tool. (If you decide to use Travis, we strongly recommend that you host this project in your own repo rather than in your cohort's FAC repository to avoid all builds getting queued together)
++ **CI** Employ continuous intergration on your project with Travis or a similar tool. (If you decide to use Travis, we strongly recommend that you host this project in your own repo rather than in your cohort's FAC repository to avoid all builds getting queued together)
 
-+ **Code Coverage**Use CodeCov or a similar tool for test coverage.
++ **Code Coverage** Use CodeCov or a similar tool for test coverage.
 
 + Display continuous intergration and code coverage badges on your project README.
 
