@@ -7,10 +7,10 @@ This application finds out exact time of sunrise/sunrise for a chosen city/date 
 ### User Story:
 #### As a someone who wants to have a fresh start of her/his day:
 
-+ be able to find out time for a sunrise for selected date
++ be able to find out time for a sunrise for a selected city/date
 
 #### As a someone who wants to spend *special* time watching a sunset:
-+ be able to find out time for a sunset for a selected date.
++ be able to find out time for a sunset for a selected city/date.
 
 
 ### Specs:
