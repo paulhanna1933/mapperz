@@ -1,0 +1,24 @@
+{
+  "name": "sunsetly",
+  "version": "1.0.0",
+  "description": "![Image](https://api.monosnap.com/rpc/file/download?id=qvQ4RXilpamDt6abtIe0N8SM0x8WwH)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulhanna1933/SunSetly.git"
+  },
+  "author": "Heather - Leo - Paul",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paulhanna1933/SunSetly/issues"
+  },
+  "homepage": "https://github.com/paulhanna1933/SunSetly#readme",
+  "devDependencies": {
+    "istanbul": "^0.4.5",
+    "shot": "^3.4.2",
+    "tape": "^4.8.0"
+  }
+}
