@@ -1,8 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const https = require('https');
-
-
+const apiRequest = require("./myRequest");
 
 const handleHomeRoute = (res) => {
   //path.join will adjust for diff OS
@@ -48,58 +47,25 @@ const handleSunset = (res, url, callback) => {
     date = "today";
   //please filter out empty date input
   const googleUrl = `https://maps.googleapis.com/maps/api/geocode/json?&address=${cityName}`; //check for google api for no results
-  https.get(googleUrl, (res) => {
-    let error;
-    if (res.statusCode !== 200) {
-      error = new Error('Request Failed.\n' + `statusCode:${res.statusCode}`);
-    }
-    if (error) {
-      callback(error.message);
+  apiRequest(res, googleUrl, (err, data)=>{
+    if (data.results.length == 0) {
+      callback(null, `you sure that's a valid location, buddy?`);
+    }else{
+      console.log(data);
+      const lat = data.results[0].geometry.location.lat;
+      const lng = data.results[0].geometry.location.lng;
+      const sunUrl = `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&date=${date}`;
+  apiRequest(res, sunUrl, (err, data) => {
+    if(err){
+      callback(err);
       return;
     }
-    res.setEncoding('utf8');
-    let rawData = '';
-    res.on('data', (chunk) => {
-      rawData += chunk;
-    });
-    res.on('end', () => {
-      console.log(rawData);
-      const parsedResult = JSON.parse(rawData);
-
-      if (parsedResult.results.length == 0) {
-        callback(null, `you sure that's a valid location, buddy?`);
-      }else{
-        const lat = parsedResult.results[0].geometry.location.lat;
-        const lng = parsedResult.results[0].geometry.location.lng;
-        const sunUrl = `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&date=${date}`;
-        https.get(sunUrl, (res)=>{
-          let error;
-          if (res.statusCode !== 200) {
-            error = new Error('Request Failed.\n' + `statusCode:${res.statusCode}`);
-          }
-          if (error) {
-            callback(error.message);
-            return;
-          }
-          res.setEncoding('utf8');
-          let sunData = '';
-          res.on('data', (chunk) => {
-            sunData += chunk;
-          });
-          res.on('end', () => {
-            const parsedSunData = JSON.parse(sunData);
-            const sunrise = parsedSunData.results.sunrise;
-            const sunset = parsedSunData.results.sunset;
-            callback(null, `You are searching for ${decodeURI(cityName)}\nTime in UTC:\nsunrise:${sunrise}, sunset:${sunset}`);
-        });
-      }).on('error', (e) => {
-          callback(e.message);
+    const sunrise = data.results.sunrise;
+    const sunset = data.results.sunset;
+    callback(null, `You are searching for ${decodeURI(cityName)}\nTime in UTC:\nsunrise:${sunrise}, sunset:${sunset}`);
   });
-  }
-  })
-}).on('error', (e) => {
-    callback(e.message);
-  });
+}
+});
 }
 
 module.exports = {
