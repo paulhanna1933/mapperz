@@ -5,7 +5,8 @@ const router = (req, res) => {
   if (url === '/') {
     handlers.handleHomeRoute(res);
   } else if (url.indexOf('/sunset') !== -1) {
-    res.end("hello xhr")
+    handlers.handleSunset(res, url);
+
   } else if (url.indexOf('/views') !== -1) {
     handlers.handlePublic(res, url);
   } else {
