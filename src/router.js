@@ -5,8 +5,10 @@ const router = (req, res) => {
   if (url === '/') {
     handlers.handleHomeRoute(res);
   } else if (url.indexOf('/sunset') !== -1) {
-    handlers.handleSunset(res, url);
-
+    handlers.handleSunset(res, url, function(err, result){
+      res.writeHead(200, "Content-Type:text/html");
+      res.end(result);
+    });
   } else if (url.indexOf('/views') !== -1) {
     handlers.handlePublic(res, url);
   } else {

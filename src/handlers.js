@@ -41,7 +41,7 @@ const handlePublic = (res, url) => {
   });
 }
 
-const handleSunset = (res, url) => {
+const handleSunset = (res, url, callback) => {
   const cityName = url.split('&')[0].split('cityname=')[1];
   let date = url.split('date=')[1];
   if(date.length === 0)
@@ -96,10 +96,7 @@ const handleSunset = (res, url) => {
             const parsedSunData = JSON.parse(sunData);
             const sunrise = parsedSunData.results.sunrise;
             const sunset = parsedSunData.results.sunset;
-            let jsonObj = {
-              sunrise: sunrise,
-              sunset: sunset
-            };
+            callback(null, `sunrise:${sunrise}, sunset:${sunset}`);
         });
       });
   }
@@ -107,13 +104,6 @@ const handleSunset = (res, url) => {
 }).on('error', (e) => {
     console.log(e);
   });
-
-  //https://developers.google.com/maps/documentation/geocoding/intro
-  //https://sunrise-sunset.org/api
-  res.end(googleUrl)
-
-
-
 }
 
 module.exports = {
