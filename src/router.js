@@ -4,8 +4,12 @@ const router = (req, res) => {
   const url = req.url;
   if (url === '/') {
     handlers.handleHomeRoute(res);
-  } else if (url.indexOf('/sunset') !== -1) {
-    handlers.handleSunset(res);
+  } else if (url.indexOf('/?') !== -1) {
+    //handlers.handleSunset(res);
+    res.writeHead(302, {"location":"/"});
+    res.end();
+  }else if (url.indexOf('/sunset') !== -1) {
+    res.end("hello xhr")
   } else if (url.indexOf('/views') !== -1) {
     handlers.handlePublic(res, url);
   } else {
