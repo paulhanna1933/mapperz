@@ -5,14 +5,16 @@ const router = (req, res) => {
   if (url === '/') {
     handlers.handleHomeRoute(res);
   } else if (url.indexOf('/sunset') !== -1) {
-    handlers.handleSunset(res, url, function(err, result){
-      if(err){
+
+    handlers.handleSunset(res, url, function(err, result) {
+      if (err) {
         res.writeHead(500, "Content-Type:text/html");
         res.end("<h1>heather broke something on the back end</h1>");
-      }else{
+      } else {
         res.writeHead(200, "Content-Type:text/html");
         res.end(result);
       }
+
     });
   } else if (url.indexOf('/views') !== -1) {
     handlers.handlePublic(res, url);
