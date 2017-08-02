@@ -43,7 +43,9 @@ const handlePublic = (res, url) => {
 
 const handleSunset = (res, url) => {
   const cityName = url.split('&')[0].split('cityname=')[1];
-  const date = url.split('date=')[1];
+  let date = url.split('date=')[1];
+  if(date.length === 0)
+    date = "today";
   //please filter out empty date input
   const googleUrl = `https://maps.googleapis.com/maps/api/geocode/json?&address=${cityName}`; //check for google api for no results
   https.get(googleUrl, (res) => {
@@ -64,19 +66,51 @@ const handleSunset = (res, url) => {
       rawData += chunk;
     });
     res.on('end', () => {
+      console.log(rawData);
       const parsedResult = JSON.parse(rawData);
+
       if (parsedResult.results.length == 0) {
-        console.log('There is such city');
-      }
-      //console.log(rawData);
-    });
-  }).on('error', (e) => {
+        console.log('There is no such city');
+      }else{
+        const lat = parsedResult.results[0].geometry.location.lat;
+        const lng = parsedResult.results[0].geometry.location.lng;
+        const sunUrl = `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&date=${date}`;
+        https.get(sunUrl, (res)=>{
+          let error;
+          // if (res.statusCode !== 200) {
+          //   error = new Error('Request Failed.\n' + `statusCode:
+          //     $ {
+          //       res.statusCode
+          //     }`);
+          // }
+          if (error) {
+            console.log(error);
+            return;
+          }
+          res.setEncoding('utf8');
+          let sunData = '';
+          res.on('data', (chunk) => {
+            sunData += chunk;
+          });
+          res.on('end', () => {
+            const parsedSunData = JSON.parse(sunData);
+            const sunrise = parsedSunData.results.sunrise;
+            const sunset = parsedSunData.results.sunset;
+            let jsonObj = {
+              sunrise: sunrise,
+              sunset: sunset
+            };
+        });
+      });
+  }
+  })
+}).on('error', (e) => {
     console.log(e);
   });
 
   //https://developers.google.com/maps/documentation/geocoding/intro
   //https://sunrise-sunset.org/api
-  // res.end(googleUrl)
+  res.end(googleUrl)
 
 
 
