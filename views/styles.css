@@ -1,7 +1,7 @@
-/*mobile first*/
+/*mobile first design*/
 
 * {
-  font-family: 'Spectral', serif;
+  font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -21,7 +21,8 @@ body {
 .main-container {
   margin: 45% auto;
   width: 80%;
-  border: solid white 0.1rem;
+  background-color: gray;
+  opacity: 0.5;
 }
 
 .form {
@@ -31,12 +32,12 @@ body {
 
 .date-box, .city-box {
   width: 60%;
-  font-size: 1rem;
+  font-size: 1.3rem;
 }
 
 label {
-  color: white;
-  font-size: 1.5rem;
+  color: black;
+  font-size: 1.3rem;
 }
 
 .submit {}
@@ -57,4 +58,7 @@ label {
   border: solid 1rem red;
 }
 
-@@media (min-width: 700px) {}
+
+/*this is for desktop */
+
+@media (min-width: 700px) {}
