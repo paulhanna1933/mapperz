@@ -4,6 +4,8 @@ var result = document.getElementById('result')
 
 cityInput.addEventListener('submit', function(e) { //event listener for any change in input of starInput
   var cityName = document.getElementById('city-name').value; //please check if input is letters
+  //if (cityName)
+
   var date = document.getElementById('date').value;
   e.preventDefault();
   document.getElementById("info").reset();
