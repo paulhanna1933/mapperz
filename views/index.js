@@ -7,7 +7,7 @@ cityInput.addEventListener('submit', function(e) { //event listener for any chan
   var date = document.getElementById('date').value;
   e.preventDefault();
   document.getElementById("info").reset();
-  var url = '/sunset?' + 'cityname=' + cityName + '&date=' + date;
+  var url = '/sunset?' + 'cityname=' + encodeURI(cityName) + '&date=' + date;
   console.log(url);
   var xhr = new XMLHttpRequest(); //create new xhr request
   xhr.onreadystatechange = function() {
