@@ -40,6 +40,7 @@ This application finds out the exact time of sunrise/sunrise for a chosen city/d
 
 + Include a user input field on your web app and include server-side validation to protect your server from potentially malicious user input.
 
+![Image](https://api.monosnap.com/rpc/file/download?id=poimBxlDAyMOC4JQnHcLB7evjmsKZE)
 
 ### Stretch Goal:
 
