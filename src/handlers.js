@@ -25,7 +25,9 @@ const handlePublic = (res, url) => {
     html: "text/html",
     css: "text/css",
     js: "application/javascript",
-    ico: "image/x-icon"
+    ico: "image/x-icon",
+    jpg: "image/jpg"
+
   }
   const filePath = path.join(__dirname, "..", url);
   fs.readFile(filePath, (err, file) => {
@@ -44,7 +46,7 @@ const handlePublic = (res, url) => {
 const handleSunset = (res, url, callback) => {
   const cityName = url.split('&')[0].split('cityname=')[1];
   let date = url.split('date=')[1];
-  if(date.length === 0)
+  if (date.length === 0)
     date = "today";
   //please filter out empty date input
   const googleUrl = `https://maps.googleapis.com/maps/api/geocode/json?&address=${cityName}`; //check for google api for no results
@@ -71,11 +73,11 @@ const handleSunset = (res, url, callback) => {
 
       if (parsedResult.results.length == 0) {
         console.log('There is no such city');
-      }else{
+      } else {
         const lat = parsedResult.results[0].geometry.location.lat;
         const lng = parsedResult.results[0].geometry.location.lng;
         const sunUrl = `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&date=${date}`;
-        https.get(sunUrl, (res)=>{
+        https.get(sunUrl, (res) => {
           let error;
           // if (res.statusCode !== 200) {
           //   error = new Error('Request Failed.\n' + `statusCode:
@@ -97,11 +99,11 @@ const handleSunset = (res, url, callback) => {
             const sunrise = parsedSunData.results.sunrise;
             const sunset = parsedSunData.results.sunset;
             callback(null, `sunrise:${sunrise}, sunset:${sunset}`);
+          });
         });
-      });
-  }
-  })
-}).on('error', (e) => {
+      }
+    })
+  }).on('error', (e) => {
     console.log(e);
   });
 }

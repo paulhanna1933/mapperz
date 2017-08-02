@@ -3,7 +3,8 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Alpha.HAML Star Autocomplete</title>
+  <title>Sunsetly:find sunset/sunrise time</title>
+  <link href="https://fonts.googleapis.com/css?family=Spectral" rel="stylesheet">
   <link rel="stylesheet" href="views/styles.css">
   <!-- <link rel="icon" href="./assets/favicon.ico" type="image/x-icon"> -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,18 +12,19 @@
 
 <body>
   <header class="header">
-    <h3>ALPHA.haml</h3>
+    <h3>sunsetly</h3>
   </header>
 
   <section>
     <div class="main-container">
 
       <form id="info" action="" method="GET">
-        <label for="city-name">city name</label>
-        <input id="city-name" type="text" name="city-name" value="" placeholder="Search for your city" class="text-input" autocomplete="off" required>
-        <label for="date">date</label>
-        <input id="date" type="date" name="date-input" placeholder="today">
-        <input type="submit" value="submit">
+        <label for="city-name">City&#160;</label>
+        <input class="city-box" id="city-name" type="text" name="city-name" value="" placeholder="city" class="text-input" autocomplete="off" required></br>
+
+        <label for="date">Date</label>
+        <input class="date-box" id="date" type="date" name="date-input" placeholder="today">
+        </br><input class="sumit" type="submit" value="submit">
       </form>
     </div>
     <div id="result"></div>
@@ -31,4 +33,4 @@
   <script type="text/javascript" src="views/index.js"></script>
 </body>
 
-</html>
+</html
