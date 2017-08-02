@@ -43,6 +43,7 @@ This application finds out the exact time of sunrise/sunrise for a chosen city/d
 
 ### Stretch Goal:
 
+Convert UTC times 
 Lovely CSS layouts
 
 
