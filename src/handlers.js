@@ -50,14 +50,11 @@ const handleSunset = (res, url, callback) => {
   const googleUrl = `https://maps.googleapis.com/maps/api/geocode/json?&address=${cityName}`; //check for google api for no results
   https.get(googleUrl, (res) => {
     let error;
-    // if (res.statusCode !== 200) {
-    //   error = new Error('Request Failed.\n' + `statusCode:
-    //     $ {
-    //       res.statusCode
-    //     }`);
-    // }
+    if (res.statusCode !== 200) {
+      error = new Error('Request Failed.\n' + `statusCode:${res.statusCode}`);
+    }
     if (error) {
-      console.log(error);
+      callback(error.message);
       return;
     }
     res.setEncoding('utf8');
@@ -70,21 +67,18 @@ const handleSunset = (res, url, callback) => {
       const parsedResult = JSON.parse(rawData);
 
       if (parsedResult.results.length == 0) {
-        console.log('There is no such city');
+        callback(null, `you sure that's a valid location, buddy?`);
       }else{
         const lat = parsedResult.results[0].geometry.location.lat;
         const lng = parsedResult.results[0].geometry.location.lng;
         const sunUrl = `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&date=${date}`;
         https.get(sunUrl, (res)=>{
           let error;
-          // if (res.statusCode !== 200) {
-          //   error = new Error('Request Failed.\n' + `statusCode:
-          //     $ {
-          //       res.statusCode
-          //     }`);
-          // }
+          if (res.statusCode !== 200) {
+            error = new Error('Request Failed.\n' + `statusCode:${res.statusCode}`);
+          }
           if (error) {
-            console.log(error);
+            callback(error.message);
             return;
           }
           res.setEncoding('utf8');
@@ -96,13 +90,15 @@ const handleSunset = (res, url, callback) => {
             const parsedSunData = JSON.parse(sunData);
             const sunrise = parsedSunData.results.sunrise;
             const sunset = parsedSunData.results.sunset;
-            callback(null, `sunrise:${sunrise}, sunset:${sunset}`);
+            callback(null, `You are searching for ${decodeURI(cityName)}\nTime in UTC:\nsunrise:${sunrise}, sunset:${sunset}`);
         });
-      });
+      }).on('error', (e) => {
+          callback(e.message);
+  });
   }
   })
 }).on('error', (e) => {
-    console.log(e);
+    callback(e.message);
   });
 }
 
