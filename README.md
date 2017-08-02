@@ -1,7 +1,7 @@
 ![Image](https://api.monosnap.com/rpc/file/download?id=qvQ4RXilpamDt6abtIe0N8SM0x8WwH)
 
 ## Sun Setly
-This application finds out exact time of sunrise/sunrise for a chosen city/date by a user. To check out the application, please click here
+This application finds out the exact time of sunrise/sunrise for a chosen city/date by a user. To check out the application, please click here
 
 
 ### User Story:
