@@ -10,6 +10,7 @@ body {
   background-image: url(./assets/backgroundimageMobile.jpg);
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   width: 100%;
   height: 100vh;
 }
@@ -19,46 +20,53 @@ body {
 }
 
 .main-container {
-  margin: 45% auto;
-  width: 80%;
-  background-color: gray;
-  opacity: 0.5;
+  margin-top: 35%;
+}
+
+.sunsetly-title {
+  display: block;
+  text-align: center;
+  margin-bottom: 0.8rem;
+}
+
+.h3 {
+  text-shadow: 0 0 3px #272525;
+  font-size: 2rem;
+}
+
+.title-p {
+  text-shadow: 0 0 3px #272525;
+  font-size: 1.2rem;
 }
 
 .form {
-  display: flex;
-  flex-direction: column;
+  margin-top: 0;
+  width: 100%;
+  height: 5rem;
 }
 
 .date-box, .city-box {
+  border-radius: 5px;
   width: 60%;
   font-size: 1.3rem;
 }
 
 label {
+  font-size: 0;
+}
+
+.result {
+  margin-top: 38%;
+  background-color: rgba(255, 255, 255, .25);
+  width: 100%;
+  height: 100%;
+  padding: 5% 0;
+  font-size: 1.2rem;
   color: black;
-  font-size: 1.3rem;
-}
-
-.submit {}
-
-.resultBox {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 3em;
-  font-size: 1em;
-  border: 2px solid #868286;
-  margin-top: 1em;
-}
-
-.sunsetResult, .sunriseResult {
-  width: 10px;
-  height: 10px;
-  border: solid 1rem red;
+  text-align: center;
 }
 
 
-/*this is for desktop */
+/*below, this is for desktop */
 
 @media (min-width: 700px) {}
